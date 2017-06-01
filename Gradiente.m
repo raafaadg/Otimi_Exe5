@@ -8,8 +8,8 @@ gf2(x1,x2)=diff(f,x2);
 
 df(k,:)=[double(gf1(x(k,1),x(k,2))) double(gf2(x(k,1),x(k,2)))];
 tic;
-while((abs(double(df(k,1)))>1e-2)&&(abs(double(df(k,2)))>1e-2))
-% while((abs(double(df(k,1)))>1e-2)||(abs(double(df(k,2)))>1e-2))
+% while((abs(double(df(k,1)))>1e-2)&&(abs(double(df(k,2)))>1e-2))
+while((abs(double(df(k,1)))>1e-2)||(abs(double(df(k,2)))>1e-2))
 
 xa=x(k,:)-a*df(k,:);
 g(a)=f(xa(1),xa(2));
@@ -18,15 +18,15 @@ if al_contr~=0
 else
     switch eq
         case 0
-            [A,B,~,~]=bissecao(g,-10,10);
-            al(k)=(A(end)+B(end))/2;
+            [A,B,LAMB,~]=bissecao(g,0,2);
+%             al(k)=(A(end)+B(end))/2;
+            al(k)=LAMB(end);
         case 1
-            [A,B,~,~,~]=sec_aurea(g,-10,10);
-            al(k)=(A(end)+B(end))/2;
+            [A,B,LAMB,U,ERRO]=sec_aurea(g,-10,10);
+            al(k)=(LAMB(end)+U(end))/2;
     end
 end
-    
-     
+
 x(k+1,:)=x(k,:)-al(k)*df(k,:);
 k=k+1;
 df(k,:)=[double(gf1(x(k,1),x(k,2))) double(gf2(x(k,1),x(k,2)))];

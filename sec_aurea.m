@@ -3,9 +3,9 @@ au=0.618;   %Denife o valor Aureo
 it=1;       %Variável para controlar as iterações
 lamb(it)=a(it)+(1-au)*(b(it)-a(it));    %Calcula Alfa1
 u(it)=a(it)+au*(b(1)-a(1));             %Calcula u1
-% erro(it)=abs(double(f(b(it)))-double(f(a(it)))); %Calcula erro inicial
+erro(it)=abs(double(f(b(it)))-double(f(a(it)))); %Calcula erro inicial
 % erro(it)=abs(b(it)-a(it));
-erro(it)=abs(double(f(lamb(it)))-double(f(u(it))));
+% erro(it)=abs(double(f(lamb(it)))-double(f(u(it))));
 while(erro(it)>1e-3)    %Execute enquanto e erro for menor que 10^-3
    if(double(f(lamb(it)))<double(f(u(it)))) %Se Alfa < u
        a(it+1)=a(it);       % a seguinte recebe a anterior
@@ -26,9 +26,9 @@ while(erro(it)>1e-3)    %Execute enquanto e erro for menor que 10^-3
 %        ', f(lamb) = ' num2str(double(f(lamb(it)))) ', f(mi) = ' ...
 %        num2str(double(f(u(it)))) ' ]']);
    it=it+1;
-%    erro(it)=abs(double(f(b(it)))-double(f(a(it))));
+   erro(it)=abs(double(f(b(it)))-double(f(a(it))));
 %    erro(it)=abs(b(it)-a(it));
-   erro(it)=abs(double(f(lamb(it)))-double(f(u(it))));
+%    erro(it)=abs(double(f(lamb(it)))-double(f(u(it))));
 
 end
 % disp('------------------------------------------------------------------');
