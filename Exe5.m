@@ -1,4 +1,4 @@
-% clear all;
+clear all;
 close all;clc;
 
 syms x1 x2 a
@@ -34,20 +34,36 @@ switch metodo
         disp('Método do Gradiente Selecionado');
 %         uni=input('Selecione o Método de Busca Unidimensional -> 0 = Bisseção; 1 = Seção Aurea\n');
         for it=1:size(alfa,2)
-            [X,DF]=Gradiente(f,x,alfa(it),0)
+            if alfa(it)==0
+                disp('Executando método com o alfa ótimo');
+            else
+                disp(['Executando método com o alfa = ' num2str(alfa(it))]);
+            end
+            [X,DF,ALFA]=Gradiente(f,x,alfa(it),0);
             plot(X(:,1),X(:,2),'LineWidth',1,...
             'Marker','o',...
             'MarkerSize',5,...
             'DisplayName',['alfa = ' num2str(alfa(it))])           
             hold on
-            
+            clear Names
+            for k=1:size(X,1)
+                Names(k)={sprintf('Iteração nº%d',k)};
+            end
+            ALFA=ALFA';
+            T = table(X(:,1),X(:,2),DF(:,1),DF(:,2),ALFA,...
+            'VariableName',{'X1','X2','DF1','DF2','ALFA'},'RowNames',Names)
         end
     case 1
         disp('Método de Newton Selecionado');
-        [X,DF]=newton(f,x)
+        [X,DF]=newton(f,x);
         plot(X(:,1),X(:,2),'LineWidth',1,...
             'Marker','o',...
             'MarkerSize',5)
         hold on    
+        for k=1:size(X,1)
+                Names(k)={sprintf('Iteração nº%d',k)};
+        end
+            T = table(X(:,1),X(:,2),DF(:,1),DF(:,2),...
+            'VariableName',{'X1','X2','DF1','DF2'},'RowNames',Names)
 end
 legend('show')

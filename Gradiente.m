@@ -1,4 +1,4 @@
-function [x,df]=Gradiente(f,x,al_contr,eq)
+function [x,df,al]=Gradiente(f,x,al_contr,eq)
 syms x1 x2 a
 k=1;
 x(k,:)=x;
@@ -18,11 +18,11 @@ if al_contr~=0
 else
     switch eq
         case 0
-            [A,B,LAMB,~]=bissecao(g,0,2);
+            [~,~,LAMB,~]=bissecao(g,0,2);
 %             al(k)=(A(end)+B(end))/2;
             al(k)=LAMB(end);
         case 1
-            [A,B,LAMB,U,ERRO]=sec_aurea(g,-10,10);
+            [A,B,LAMB,U,~]=sec_aurea(g,-10,10);
             al(k)=(LAMB(end)+U(end))/2;
     end
 end
@@ -30,7 +30,8 @@ end
 x(k+1,:)=x(k,:)-al(k)*df(k,:);
 k=k+1;
 df(k,:)=[double(gf1(x(k,1),x(k,2))) double(gf2(x(k,1),x(k,2)))];
-disp([x(end,:);df(end,:)])
+al(k)=0;
+% disp([x(end,:);df(end,:)])
 end
 toc;
 end
