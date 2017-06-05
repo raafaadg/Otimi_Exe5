@@ -6,7 +6,7 @@ u(it)=a(it)+au*(b(1)-a(1));             %Calcula u1
 erro(it)=abs(double(f(b(it)))-double(f(a(it)))); %Calcula erro inicial
 % erro(it)=abs(b(it)-a(it));
 % erro(it)=abs(double(f(lamb(it)))-double(f(u(it))));
-while(erro(it)>1e-3)    %Execute enquanto e erro for menor que 10^-3
+while(erro(it)>1e-4)    %Execute enquanto e erro for menor que 10^-3
    if(double(f(lamb(it)))<double(f(u(it)))) %Se Alfa < u
        a(it+1)=a(it);       % a seguinte recebe a anterior
        b(it+1)=u(it);       % b seguinte recebe u anterior

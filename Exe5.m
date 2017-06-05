@@ -1,5 +1,6 @@
-clear all;
-close all;clc;
+close all
+clear all
+clc;
 
 syms x1 x2 a
 format short
@@ -14,7 +15,7 @@ switch scen
         alfa=[0 .1 .12 .15];
     case 1
         [xx,yy]=meshgrid(-7:.25:7,-20:.5:36);
-        x=[-6 4];
+        x=[4 4];
         f(x1,x2)=2*x1^3+(x2-8)^2+exp(-x1);
         zz=2.*xx.^3+(yy-8).^2+exp(-xx);
         alfa=[0 .01 .03 .05];
@@ -28,18 +29,18 @@ hold on
 grid on
 disp('Processo de minimazação');
 metodo=input('Selecione o Método -> 0 = Gradiente; 1 = Newton\n');
-% alfa=[0];
+% alfa=[0.03];
 switch metodo
     case 0
         disp('Método do Gradiente Selecionado');
-%         uni=input('Selecione o Método de Busca Unidimensional -> 0 = Bisseção; 1 = Seção Aurea\n');
+        uni=input('Selecione o Método de Busca Unidimensional -> 0 = Bisseção; 1 = Seção Aurea\n');
         for it=1:size(alfa,2)
             if alfa(it)==0
                 disp('Executando método com o alfa ótimo');
             else
                 disp(['Executando método com o alfa = ' num2str(alfa(it))]);
             end
-            [X,DF,ALFA]=Gradiente(f,x,alfa(it),0);
+            [X,DF,ALFA]=Gradiente(f,x,alfa(it),uni);
             plot(X(:,1),X(:,2),'LineWidth',1,...
             'Marker','o',...
             'MarkerSize',5,...
