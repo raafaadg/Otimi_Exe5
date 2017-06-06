@@ -2,7 +2,7 @@ close all
 clear all
 clc;
 
-syms x1 x2 a
+syms x1 x2 a1
 format short
 
 scen=input('Informe 0(zero) para o Problema do Slide ou 1(um) para o Exercício 5\n');
@@ -15,7 +15,7 @@ switch scen
         alfa=[0 .1 .12 .15];
     case 1
         [xx,yy]=meshgrid(-7:.25:7,-20:.5:36);
-        x=[4 4];
+        x=[0 0];
         f(x1,x2)=2*x1^3+(x2-8)^2+exp(-x1);
         zz=2.*xx.^3+(yy-8).^2+exp(-xx);
         alfa=[0 .01 .03 .05];
@@ -29,7 +29,7 @@ hold on
 grid on
 disp('Processo de minimazação');
 metodo=input('Selecione o Método -> 0 = Gradiente; 1 = Newton\n');
-% alfa=[0.03];
+% alfa=[0];
 switch metodo
     case 0
         disp('Método do Gradiente Selecionado');
