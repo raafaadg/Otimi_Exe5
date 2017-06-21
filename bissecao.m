@@ -5,7 +5,7 @@ erro(it)=abs(double(f(b))-double(f(a)));    %Calcula erro inicial
 % erro(it)=abs(b(it)-a(it));
 lamb(it)=(a(it)+b(it))/2;
 while(erro(it)>1e-3)    %Execute enquanto e erro for menor que 10^-3
-   
+   alfa(it)=double(df(lamb(it)));
    if(double(df(lamb(it)))<0)       %Caso alfa sejá negativo
        a(it+1)=lamb(it);            % a seguinte recebe alfa atual
        b(it+1)=b(it);               % b seguinte recebe b atual

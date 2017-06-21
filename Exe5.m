@@ -1,5 +1,5 @@
 close all
-clear all
+% clear all
 clc;
 
 syms x1 x2 a1
@@ -18,7 +18,18 @@ switch scen
         x=[0 0];
         f(x1,x2)=2*x1^3+(x2-8)^2+exp(-x1);
         zz=2.*xx.^3+(yy-8).^2+exp(-xx);
-        alfa=[0 .01 .03 .05];
+        alfa=[0 .1 .3 .6];
+    case 2
+        [xx,yy]=meshgrid(-7:.25:7,-20:.5:36);
+        x=[0 0];
+        u=10;
+        p=2;
+        f(x1,x2)=2*x1^2+3*x2^2-4*x1-16*x2+u*(log(2*x1-x2+2)+log(-4*x1-x2+3));
+        f(x1,x2)=2*x1^2+3*x2^2-4*x1-16*x2+p*1/2*...
+            (16*x1^2+x2^2+8*x1*x2-24*x1-6*x2+9);
+%         zz=2.*xx.^2+3.*yy.^2-4.*xx-16.*yy+u*(log(2*xx-yy+2)+log(-4*xx-yy+3));
+        zz=2.*xx.^2+3.*yy.^2-4.*xx-16.*yy;
+        alfa=0;
 end
 figure(1);
 meshc(xx,yy,zz)

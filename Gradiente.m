@@ -9,7 +9,7 @@ gf2(x1,x2)=diff(f,x2);
 
 df(k,:)=[double(gf1(x(k,1),x(k,2))) double(gf2(x(k,1),x(k,2)))];
 tic;
-while((abs(double(df(k,1)))>1e-2)||(abs(double(df(k,2)))>1e-2))
+while((abs(df(k,1))>1e-2)||(abs(df(k,2))>1e-2))
 
 xa=x(k,:)-a*df(k,:);
 g(a)=f(xa(1),xa(2));
@@ -18,7 +18,7 @@ if al_contr~=0
 else
     switch eq
         case 0
-            [~,~,LAMB,~]=bissecao(g,0,2);
+            [~,~,LAMB,~]=bissecao(g,0,1);
 %             al(k)=(A(end)+B(end))/2;
             al(k)=LAMB(end);
         case 1
@@ -35,7 +35,7 @@ if al_contr~=0
 else
     al(k)=0;
 end
-% disp([x(end,:);df(end,:)])
+disp([x(end,:);df(end,:)])
 end
 toc;
 end
